@@ -25,7 +25,7 @@ public class Main {
         else{
             System.out.println("No Conectado");
         }
-        Usuario usuario = new Usuario(0, "Mario","mario@gmail.com", "Activo");
+        Usuario usuario = new Usuario(0, "Alberto","Alberto@gmail.com", "Inactivo");
         usuarioController.insertar(usuario);
 
 

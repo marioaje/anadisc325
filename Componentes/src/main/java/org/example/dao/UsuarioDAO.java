@@ -1,11 +1,14 @@
 package org.example.dao;
 
+import com.google.gson.Gson;
 import org.example.misc.Conexion;
+import org.example.model.Bitacora;
 import org.example.model.Usuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class UsuarioDAO {
 
@@ -27,11 +30,27 @@ public class UsuarioDAO {
 
 
             stmt.executeUpdate();
+
+            System.out.println("Usuario insertado correctamente");
+
+            //Seccion de guardar en bitacora
+            Gson gson = new Gson();
+            String json = gson.toJson(usuario);
+
+            Bitacora bitacora = new Bitacora(0, "Insertar", LocalDateTime.now(),
+                    "mario", json, "Usuario");
+
+            BitacoraDAO bitacoraDAO = new BitacoraDAO(conexion);
+
+            bitacoraDAO.insertar(bitacora);
+
+
         }catch (SQLException e){
             System.out.println("Error" + e.getMessage());
         }
 
 
     }
+
 
 }
